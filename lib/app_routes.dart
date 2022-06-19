@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
-import 'container/first_screen.dart';
-import 'container/login_screen.dart';
+import 'package:music_quizz/container/first_screen.dart';
+import 'package:music_quizz/container/notes_screen.dart';
 
 Map<String, WidgetBuilder> appRoute = {
-  '/': (context) => LoginScreen(),
-  // '/login': (context) => LoginScreen(),
+  '/': (context) => const NotesScreen(),
+  '/detail': (context) => const NoteDetailScreen(),
 };

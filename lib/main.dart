@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:music_quizz/app_routes.dart';
-import 'package:music_quizz/container/first_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -18,11 +17,9 @@ class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Titre pertinent',
+      title: 'NoteApp',
       debugShowCheckedModeBanner: true,
-      theme: ThemeData(
-        primaryColor: Colors.amberAccent
-      ),
+      theme: ThemeData(primaryColor: Colors.amberAccent),
       initialRoute: '/',
       routes: appRoute,
     );
