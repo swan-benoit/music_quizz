@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "986627143600",
+    "project_id": "musicquizz-88140",
+    "storage_bucket": "musicquizz-88140.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:986627143600:android:ed7d14f72886bdc398c875",
+        "android_client_info": {
+          "package_name": "com.example.music_quizz"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "986627143600-9jupd219e8jmifr5pd1jl2sekt4bt6tu.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqLYkYKJrVoNkAfMWFf_89D7DsZoOXakA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "986627143600-9jupd219e8jmifr5pd1jl2sekt4bt6tu.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
