@@ -23,8 +23,9 @@ class _QuizzScreen extends State<QuizzScreen> {
     QuestionService.getQuestions().then((questions) {
       setState(() {
         _questions = questions;
-        _currentQuestion = questions.first;
-        _isSelected = initIsSelected(_currentQuestion);
+        var currentQuestion = questions.first;
+        _isSelected = initIsSelected(currentQuestion);
+        _currentQuestion = currentQuestion;
       });
     });
 
@@ -39,16 +40,18 @@ class _QuizzScreen extends State<QuizzScreen> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(8.0),
-              child:
-                  Text(_currentQuestion.body, style: TextStyle(fontSize: 24.0)),
+              padding: const EdgeInsets.all(8.0),
+              child: Text(_currentQuestion.body,
+                  style: const TextStyle(fontSize: 24.0)),
             ),
-            ToggleButtons(
-                direction: Axis.vertical,
-                isSelected: _isSelected,
-                children: _currentQuestion.possibleAnswer
-                    .map((e) => Text(e))
-                    .toList())
+            _currentQuestion.possibleAnswer.length == _isSelected.length
+                ? ToggleButtons(
+                    direction: Axis.vertical,
+                    isSelected: _isSelected,
+                    children: _currentQuestion.possibleAnswer
+                        .map((e) => Text(e))
+                        .toList())
+                : const Text('Loading')
           ],
         ),
       ),
