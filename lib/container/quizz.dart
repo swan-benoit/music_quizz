@@ -4,7 +4,7 @@ import 'package:music_quizz/model/question.dart';
 import 'package:music_quizz/service/question_service.dart';
 
 class QuizzScreen extends StatefulWidget {
-  QuizzScreen({
+  const QuizzScreen({
     Key? key,
   }) : super(key: key);
 

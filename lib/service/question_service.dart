@@ -7,7 +7,7 @@ import '../model/question.dart';
 class QuestionService {
   static Future<List<Question>> getQuestions() async {
     Response response = await get(Uri.parse(
-        "https://the-trivia-api.com/api/questions?categories=music&limit=5"));
+        "https://the-trivia-api.com/api/questions?categories=music&limit=10"));
 
     if (response.statusCode == 200) {
       var json = jsonDecode(response.body);
