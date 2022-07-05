@@ -1,9 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:music_quizz/model/question.dart';
+import 'package:music_quizz/service/question_service.dart';
 
 class QuizzScreen extends StatefulWidget {
-  final List<bool> isSelected = List.of([false, false]);
-
   QuizzScreen({
     Key? key,
   }) : super(key: key);
@@ -13,6 +13,24 @@ class QuizzScreen extends StatefulWidget {
 }
 
 class _QuizzScreen extends State<QuizzScreen> {
+  List<bool> _isSelected = List.of([false, false]);
+  List<Question> _questions = List.empty();
+  Question _currentQuestion = Question.empty();
+  num _score = 0;
+
+  @override
+  void initState() {
+    QuestionService.getQuestions().then((questions) {
+      setState(() {
+        _questions = questions;
+        _currentQuestion = questions.first;
+        _isSelected = initIsSelected(_currentQuestion);
+      });
+    });
+
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,18 +38,26 @@ class _QuizzScreen extends State<QuizzScreen> {
       body: Center(
         child: Column(
           children: [
-            const Padding(
+            Padding(
               padding: EdgeInsets.all(8.0),
               child:
-                  Text("voici la question", style: TextStyle(fontSize: 24.0)),
+                  Text(_currentQuestion.body, style: TextStyle(fontSize: 24.0)),
             ),
             ToggleButtons(
                 direction: Axis.vertical,
-                isSelected: widget.isSelected,
-                children: const [Text("reponse A"), Text("reponse B")])
+                isSelected: _isSelected,
+                children: _currentQuestion.possibleAnswer
+                    .map((e) => Text(e))
+                    .toList())
           ],
         ),
       ),
     );
+  }
+
+  List<bool> initIsSelected(Question currentQuestion) {
+    return [
+      for (var i = 0; i < currentQuestion.possibleAnswer.length; i += 1) false
+    ];
   }
 }
