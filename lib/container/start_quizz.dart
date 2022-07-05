@@ -25,7 +25,7 @@ class StartQuizz extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).push(
                       MaterialPageRoute(
-                        builder: (contex) => const QuizzScreen(),
+                        builder: (contex) => QuizzScreen(),
                       ),
                     );
                   },
