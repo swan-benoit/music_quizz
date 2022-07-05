@@ -14,7 +14,7 @@ class QuizzScreen extends StatefulWidget {
 
 class _QuizzScreen extends State<QuizzScreen> {
   List<bool> _isSelected = List.of([false, false]);
-  List<Question> _questions = List.empty();
+  List<Question> _remainingQuestions = List.empty();
   Question _currentQuestion = Question.empty();
   num _score = 0;
 
@@ -22,8 +22,9 @@ class _QuizzScreen extends State<QuizzScreen> {
   void initState() {
     QuestionService.getQuestions().then((questions) {
       setState(() {
-        _questions = questions;
         var currentQuestion = questions.first;
+        questions.removeAt(0);
+        _remainingQuestions = questions;
         _isSelected = initIsSelected(currentQuestion);
         _currentQuestion = currentQuestion;
       });
@@ -41,21 +42,50 @@ class _QuizzScreen extends State<QuizzScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(_currentQuestion.body,
-                  style: const TextStyle(fontSize: 24.0)),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text(_currentQuestion.body,
+                      style: const TextStyle(fontSize: 24.0)),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text("$_score points"),
+                  ),
+                ],
+              ),
             ),
             _currentQuestion.possibleAnswer.length == _isSelected.length
                 ? ToggleButtons(
                     direction: Axis.vertical,
                     isSelected: _isSelected,
+                    onPressed: submitAnswer,
                     children: _currentQuestion.possibleAnswer
                         .map((e) => Text(e))
-                        .toList())
-                : const Text('Loading')
+                        .toList(),
+                  )
+                : _remainingQuestions.isEmpty
+                    ? const Text('Bravo')
+                    : const Text('Loading')
           ],
         ),
       ),
     );
+  }
+
+  void submitAnswer(int index) {
+    var userAnswer = _currentQuestion.possibleAnswer[index];
+
+    setState(() {
+      if (userAnswer == _currentQuestion.answer) {
+        _score += 1;
+      }
+      if (_remainingQuestions.isNotEmpty) {
+        _currentQuestion = _remainingQuestions.first;
+        _remainingQuestions.removeAt(0);
+      } else {
+        _currentQuestion = Question.empty();
+      }
+    });
   }
 
   List<bool> initIsSelected(Question currentQuestion) {
