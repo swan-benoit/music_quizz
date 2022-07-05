@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:music_quizz/container/quizz.dart';
 
 class StartQuizz extends StatelessWidget {
   const StartQuizz({
@@ -20,8 +21,14 @@ class StartQuizz extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                       primary: Colors.teal,
                       minimumSize: const Size.fromHeight(45)),
-                  child: Text("Démarrer le quizz musical !"),
-                  onPressed: () {},
+                  child: const Text("Démarrer le quizz musical "),
+                  onPressed: () {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (contex) => const QuizzScreen(),
+                      ),
+                    );
+                  },
                 ),
               ),
             ])));

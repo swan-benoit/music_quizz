@@ -100,25 +100,24 @@ class MyCustomFormState extends State<MyCustomForm> {
                 margin: const EdgeInsets.only(left: 20.0, right: 20.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.teal,
-                      minimumSize: const Size.fromHeight(45)),
-                  child: Text("Se connecter"),
-                  onPressed: () async {
-                    try {
-                      await _auth.signInWithEmailAndPassword(
-                      email: email, password: password);
-                      await Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (contex) => StartQuizz(),
-                        ),
-                      );
-                    } on FirebaseAuthException catch (e) {
-                      showDialog(
+                    primary: Colors.teal,
+                    minimumSize: const Size.fromHeight(45)),
+                child: const Text("Se connecter"),
+                onPressed: () async {
+                  try {
+                    await _auth.signInWithEmailAndPassword(
+                        email: email, password: password);
+                    await Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (contex) => const StartQuizz(),
+                      ),
+                    );
+                  } on FirebaseAuthException catch (e) {
+                    showDialog(
                         context: context,
                         builder: (ctx) => AlertDialog(
-                          title: Text("Mot de passe ou email incorrect"),
-                          content: Text('${e.message}')
-                        ),
+                            title: const Text("Mot de passe ou email incorrect"),
+                          content: Text('${e.message}')),
                       );
                     }
                   }
@@ -127,18 +126,17 @@ class MyCustomFormState extends State<MyCustomForm> {
               Container(
                 margin: const EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
                 child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      primary: Colors.teal,
-                      minimumSize: const Size.fromHeight(45)),
-                  child: Text("Pas encore inscrit ? Rejoignez nous !"),
-                  onPressed: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (contex) => SignIn(),
-                      ),
-                    );
-                  }
-                ),
+                    style: ElevatedButton.styleFrom(
+                    primary: Colors.teal,
+                    minimumSize: const Size.fromHeight(45)),
+                child: const Text("Pas encore inscrit ? Rejoignez nous !"),
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (contex) => const SignIn(),
+                    ),
+                  );
+                }),
               ),
         ],
       ),
